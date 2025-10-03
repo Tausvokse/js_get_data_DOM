@@ -4,8 +4,13 @@ const populationNodes = document.querySelectorAll('.population');
 const validPopulations = [];
 
 populationNodes.forEach((el) => {
-  const cleanedText = el.innerText.replace(/[^0-9.]/g, '');
-  const number = Number(cleanedText);
+  const cleanedText = el.innerText.replace(/[, ]/g, '');
+
+  if (!cleanedText || !/\d/.test(cleanedText)) {
+    return;
+  }
+
+  const number = parseFloat(cleanedText);
 
   if (Number.isFinite(number)) {
     validPopulations.push(number);
